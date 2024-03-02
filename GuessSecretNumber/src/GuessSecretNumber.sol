@@ -28,9 +28,14 @@ contract GuessTheSecretNumber {
 contract ExploitContract {
     bytes32 answerHash =
         0xdb81b4d58595fbbbb592d3661a34cdca14d7ab379441400cbfa1b78bc447c365;
-
     function Exploiter() public view returns (uint8) {
         uint8 n;
+	for (uint8 i = 0; i <= type(uint8).max; i++) {
+	    if (keccak256(abi.encodePacked(i)) == answerHash) {
+		n = i;
+		break;
+	    }
+	}
         return n;
     }
 }
